@@ -1,0 +1,47 @@
+.create {
+    width: 70%;
+    margin-left: max(5vw, 25px);
+    margin-top: 50px;
+    color: #6d6d6d;
+    font-size: 16px;
+}
+
+.create form {
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.create-image-upload img {
+    width: 120px;
+}
+
+.create-employee-name, .create-employee-email, .create-employee-phone,
+.create-employee-designation, .create-employee-course, .create-employee-gender {
+    width: max(40%, 280px);
+}
+
+.create-employee-name input, .create-employee-email input, .create-employee-phone input, 
+.create-employee-designation input, .create-employee-course input, 
+.create-employee-gender select {
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.create-image-upload input {
+    margin-left: 5px;
+    position: absolute;
+    top: 200px;
+}
+
+.create-button {
+    max-width: 120px;
+    border: none;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    border-radius: 10px;
+    align-self: flex-start;
+}
