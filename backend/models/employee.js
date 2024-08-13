@@ -15,7 +15,7 @@ const EmployeeSchema = new Schema({
         required: true,
         unique:true
     },
-    designaton: {
+    designation: {
         type: "String",
         required: true
     },
@@ -27,10 +27,9 @@ const EmployeeSchema = new Schema({
         type: "String",
         required: true
     },
-    image:{
-        type: "String",
-        default: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
-    }
+    image: {
+        type: String
+    },
 }, { timestamps: true })
 
 const Employee = mongoose.model("Employee", EmployeeSchema);
