@@ -1,5 +1,5 @@
 import express from 'express';
-import { createEmployee, listEmployees, updateEmployee } from '../controllers/employee.js';
+import { createEmployee, listEmployees, updateEmployee, removeEmployee } from '../controllers/employee.js';
 import multer from 'multer';
 
 //Image storage engine
@@ -17,5 +17,6 @@ const router = express.Router();
 router.post('/create', upload.single('image'), createEmployee);
 router.get('/list', listEmployees);
 router.put('/update/:id', upload.single('image'), updateEmployee);
+router.delete('/delete', removeEmployee);
 
 export default router;

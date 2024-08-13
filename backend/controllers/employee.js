@@ -79,3 +79,21 @@ export const updateEmployee = async (req, res) => {
         res.status(500).json({ success: false, message: 'Error updating employee' });
     }
 };
+
+export const removeEmployee = async (req, res)=>{
+    try{
+        const employeeToDelete = await Employee.findById(req.body.id);
+        fs.unlink(`uploads/${employeeToDelete.image}`,()=>{})
+        await Employee.findByIdAndDelete(req.body.id);
+        res.json({
+            success: true,
+            message:'Employee deleted successfully'
+        })
+    }catch(err){
+        res.json({
+            success: false,
+            message: err.message
+        })
+    }
+
+}
