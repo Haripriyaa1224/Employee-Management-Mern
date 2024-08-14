@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Create.css';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Create = ({ url }) => {
   const [image, setImage] = useState(null);
@@ -13,6 +14,7 @@ const Create = ({ url }) => {
     gender: 'Male',
     course: ''
   });
+const navigate = useNavigate();
 
   const onChangeHandler = (e) => {
     const name = e.target.name;
@@ -46,6 +48,7 @@ const Create = ({ url }) => {
         });
         setImage(null);
         toast.success(response.data.message);
+        navigate('/dashboard');
       } else {
         toast.error(response.data.message);
       }
@@ -54,6 +57,10 @@ const Create = ({ url }) => {
       toast.error('Failed to create employee. Please try again.');
     }
   };
+
+  const goToDashBoard = ()=>{
+    navigate('/dashboard');
+  }
 
   return (
     <div className='create'>

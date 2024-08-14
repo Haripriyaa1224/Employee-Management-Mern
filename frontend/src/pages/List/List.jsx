@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 
@@ -20,6 +21,7 @@ const List = () => {
       try {
         await axios.delete(`http://localhost:10000/api/employee/delete/${id}`);
         // Refresh the employee list after successful deletion
+        toast.success('Employee deleted successfully.');
         fetchEmployees();
         
       } catch (error) {
