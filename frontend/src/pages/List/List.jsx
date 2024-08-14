@@ -6,11 +6,27 @@ import { toast } from 'react-toastify';
 
 const List = () => {
   const [employees, setEmployees] = useState([]);
+  const [pagination, setPagination] = useState({
+    totalEmployees: 0,
+    currentPage: 1,
+    totalPages: 1,
+    pageSize: 0,
+  });
 
   const fetchEmployees = async () => {
     try {
       const response = await axios.get('https://employee-management-mern-71o0.onrender.com/api/employee/list');
       setEmployees(response.data.data);
+    } catch (error) {
+      console.error('Error fetching employee data:', error);
+    }
+  };
+
+  const fetchPagination = async (page = 1) => {
+    try {
+      const response = await axios.get(`http://localhost:10000/api/employee/list?page=${page}`);
+      setEmployees(response.data.data);
+      setPagination(response.data.pagination);
     } catch (error) {
       console.error('Error fetching employee data:', error);
     }
@@ -35,6 +51,10 @@ const List = () => {
   useEffect(() => {
     fetchEmployees();
   }, []);
+
+  const handlePageChange = (newPage) => {
+    fetchPagination(newPage);
+  };
 
   return (
     <div>
@@ -67,6 +87,19 @@ const List = () => {
           ))}
         </tbody>
       </table>
+      <div>
+        <button 
+          onClick={() => handlePageChange(pagination.currentPage - 1)} 
+          disabled={pagination.currentPage === 1}>
+          Previous
+        </button>
+        <span> Page {pagination.currentPage} of {pagination.totalPages} </span>
+        <button 
+          onClick={() => handlePageChange(pagination.currentPage + 1)} 
+          disabled={pagination.currentPage === pagination.totalPages}>
+          Next
+        </button>
+      </div>
     </div>
   );
 
