@@ -9,7 +9,7 @@ const List = () => {
 
   const fetchEmployees = async () => {
     try {
-      const response = await axios.get('http://localhost:10000/api/employee/list');
+      const response = await axios.get('https://employee-management-mern-71o0.onrender.com/api/employee/list');
       setEmployees(response.data.data);
     } catch (error) {
       console.error('Error fetching employee data:', error);
@@ -19,7 +19,7 @@ const List = () => {
   async function handleDelete(id) {
     if (window.confirm('Are you sure you want to delete this employee?')) {
       try {
-        await axios.delete(`http://localhost:10000/api/employee/delete/${id}`);
+        await axios.delete(`https://employee-management-mern-71o0.onrender.com/api/employee/delete/${id}`);
         // Refresh the employee list after successful deletion
         toast.success('Employee deleted successfully.');
         fetchEmployees();

@@ -9,9 +9,9 @@ import DashBoard from './pages/DashBoard/DashBoard'
 
 const App = () => {
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
 
-  const url = 'http://localhost:10000'
+  const url = 'https://employee-management-mern-71o0.onrender.com'
 
   return (
     <>

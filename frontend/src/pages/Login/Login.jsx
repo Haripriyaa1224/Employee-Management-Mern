@@ -17,7 +17,7 @@ const Login = () => {
     const onSubmitHandler = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:10000/api/admin/login', credentials);
+            const response = await axios.post('https://employee-management-mern-71o0.onrender.com/api/admin/login', credentials);
             if (response.data.success) {
                 toast.success(response.data.message);
                 navigate('/dashboard');
