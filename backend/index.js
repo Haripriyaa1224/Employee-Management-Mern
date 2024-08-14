@@ -3,12 +3,14 @@ import dotenv from 'dotenv/config.js';
 import mongoose from 'mongoose';
 import  EmployeeRouter from './routes/employee.js';
 import userRouter from './routes/user.js';
+import cors from 'cors';
 
 const app = express();
 
 const PORT = process.env.PORT || 8080;
 
 app.use(express.json());
+app.use(cors());
 
 mongoose.connect(process.env.CONNECTION_STRING)
 .then(()=>{

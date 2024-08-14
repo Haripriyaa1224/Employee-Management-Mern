@@ -4,7 +4,9 @@ import multer from 'multer';
 
 //Image storage engine
 const storage = multer.diskStorage({
-    destination: 'uploads',
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/');
+    },
     filename: (req,file,cb)=>{
         return cb(null,`${Date.now()}${file.originalname}`)
     }
@@ -17,6 +19,6 @@ const router = express.Router();
 router.post('/create', upload.single('image'), createEmployee);
 router.get('/list', listEmployees);
 router.put('/update/:id', upload.single('image'), updateEmployee);
-router.delete('/delete', removeEmployee);
+router.delete('/delete/:id', removeEmployee);
 
 export default router;

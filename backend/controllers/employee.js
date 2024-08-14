@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 
 export const createEmployee = async (req, res) => {
-    let image_filename = `${req.file.filename}`;
+    let image_filename = req.file ? req.file.filename : null;
 
     const newlyCreatedEmployee = new Employee({
         name: req.body.name,
@@ -82,9 +82,10 @@ export const updateEmployee = async (req, res) => {
 
 export const removeEmployee = async (req, res)=>{
     try{
-        const employeeToDelete = await Employee.findById(req.body.id);
+        const { id } = req.params;
+        const employeeToDelete = await Employee.findById(id);
         fs.unlink(`uploads/${employeeToDelete.image}`,()=>{})
-        await Employee.findByIdAndDelete(req.body.id);
+        await Employee.findByIdAndDelete(id);
         res.json({
             success: true,
             message:'Employee deleted successfully'
