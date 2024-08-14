@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv/config.js';
 import mongoose from 'mongoose';
 import  EmployeeRouter from './routes/employee.js';
+import userRouter from './routes/user.js';
 
 const app = express();
 
@@ -19,6 +20,7 @@ mongoose.connect(process.env.CONNECTION_STRING)
 
 app.use('/api/employee', EmployeeRouter)
 app.use('/images', express.static('uploads')) //to mount images 
+app.use('/api/admin', userRouter);
 
 
 
