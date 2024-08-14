@@ -19,9 +19,11 @@ const App = () => {
     <Router>
       <Routes>
        <Route path='/' element={<Login />} />
+       
        <Route path='/dashboard' element={<DashBoard />} />
         <Route path='/create' element={<Create url={url} />} />
         <Route path='/list' element={<List url={url} />} />
+        
       </Routes>
     </Router>
     

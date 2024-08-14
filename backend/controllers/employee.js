@@ -29,18 +29,35 @@ export const createEmployee = async (req, res) => {
 };
 
 export const listEmployees = async (req, res) => {
-    try{
-        const employees = await Employee.find({});
+    try {
+        const page = parseInt(req.query.page) || 1; // Current page, default to 1
+        const limit = parseInt(req.query.limit) || 10; // Number of records per page, default to 10
+        const skip = (page - 1) * limit; // Number of records to skip
+
+        // Fetch employees with pagination
+        const employees = await Employee.find({})
+            .skip(skip)
+            .limit(limit);
+
+        // Get the total count of employees
+        const totalEmployees = await Employee.countDocuments();
+
         res.json({
             success: true,
-            data: employees
-        })
-    }
-    catch(err){
-        cosolog.log(err)
-        res.json({success: false, message: 'error'})
+            data: employees,
+            pagination: {
+                totalEmployees,
+                currentPage: page,
+                totalPages: Math.ceil(totalEmployees / limit),
+                pageSize: employees.length,
+            }
+        });
+    } catch (err) {
+        console.log(err);
+        res.json({ success: false, message: 'error' });
     }
 };
+
 
 export const updateEmployee = async (req, res) => {
     const { id } = req.params;  // Get the employee ID from the URL parameters
